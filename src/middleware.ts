@@ -92,5 +92,5 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
 });
 
 export const config = {
-  matcher: '/((?!_next|_vercel|monitoring|.*\\..*).*)',
+  matcher: '/((?!_next|_vercel|monitoring|.*\\..*|api/trpc).*)',
 };
