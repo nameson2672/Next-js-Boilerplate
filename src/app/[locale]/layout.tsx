@@ -58,6 +58,7 @@ export default async function RootLayout(props: {
         />
       </head>
       <body>
+
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -70,6 +71,7 @@ export default async function RootLayout(props: {
             </PostHogProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
+
       </body>
     </html>
   );

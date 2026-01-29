@@ -3,6 +3,7 @@
 import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { api } from '@/trpc/react';
 
 export default function OnboardingPage() {
   const { user } = useUser();
@@ -10,7 +11,9 @@ export default function OnboardingPage() {
 
   const [purpose, setPurpose] = useState('');
   const [source, setSource] = useState('');
-
+  const { data, isLoading } = api.post.hello.useQuery({
+    text: 'Nameson',
+  });
   const handleSubmit = async () => {
     if (!user) {
       return;
@@ -46,7 +49,7 @@ export default function OnboardingPage() {
   return (
     <div className="mx-auto flex max-w-lg flex-col gap-4 py-20">
       <h1 className="text-2xl font-bold">Welcome! Let's get started.</h1>
-
+      { isLoading ? 'loading...' : data?.greeting}
       <label>
         Why are you using our app?
         <input
