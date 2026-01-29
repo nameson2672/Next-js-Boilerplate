@@ -6,25 +6,6 @@ import { AnimatedGroup } from '@/components/ui/animated-group';
 import { Button } from '@/components/ui/button';
 import { TextEffect } from '@/components/ui/text-effect';
 
-const transitionVariants = {
-  item: {
-    hidden: {
-      opacity: 0,
-      filter: 'blur(12px)',
-      y: 12,
-    },
-    visible: {
-      opacity: 1,
-      filter: 'blur(0px)',
-      y: 0,
-      transition: {
-        type: 'spring',
-        bounce: 0.3,
-        duration: 1.5,
-      },
-    },
-  },
-};
 
 export default function HeroSection() {
   return (
@@ -83,7 +64,26 @@ export default function HeroSection() {
 
             <div className="mx-auto max-w-7xl px-6">
               <div className="text-center sm:mx-auto lg:mt-0 lg:mr-auto">
-                <AnimatedGroup variants={transitionVariants}>
+                <AnimatedGroup variants={{
+                  item: {
+                    hidden: {
+                      opacity: 0,
+                      filter: 'blur(12px)',
+                      y: 12,
+                    },
+                    visible: {
+                      opacity: 1,
+                      filter: 'blur(0px)',
+                      y: 0,
+                      transition: {
+                        type: 'spring',
+                        bounce: 0.3,
+                        duration: 1.5,
+                      },
+                    },
+                  },
+                }}
+                >
                   <Link
                     href="#link"
                     className="group mx-auto flex w-fit items-center gap-4 rounded-full border bg-muted p-1 pl-4 shadow-md shadow-zinc-950/5 transition-colors duration-300 hover:bg-background dark:border-t-white/5 dark:shadow-zinc-950 dark:hover:border-t-border"
@@ -133,7 +133,6 @@ export default function HeroSection() {
                         },
                       },
                     },
-                    ...transitionVariants,
                   }}
                   className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row"
                 >
@@ -176,7 +175,6 @@ export default function HeroSection() {
                     },
                   },
                 },
-                ...transitionVariants,
               }}
             >
               <div className="relative mt-8 -mr-56 overflow-hidden mask-b-from-55% px-2 sm:mt-12 sm:mr-0 md:mt-20">

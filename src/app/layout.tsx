@@ -1,10 +1,6 @@
 import type { Metadata } from 'next';
-import { hasLocale, NextIntlClientProvider } from 'next-intl';
-import { setRequestLocale } from 'next-intl/server';
-import { notFound } from 'next/navigation';
 import { PostHogProvider } from '@/components/analytics/PostHogProvider';
 import { ThemeProvider } from '@/components/theme-provider';
-import { routing } from '@/lib/I18nRouting';
 import '@/styles/global.css';
 
 export const metadata: Metadata = {
@@ -32,24 +28,12 @@ export const metadata: Metadata = {
   ],
 };
 
-export function generateStaticParams() {
-  return routing.locales.map(locale => ({ locale }));
-}
 
 export default async function RootLayout(props: {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
 }) {
-  const { locale } = await props.params;
-
-  if (!hasLocale(routing.locales, locale)) {
-    notFound();
-  }
-
-  setRequestLocale(locale);
-
   return (
-    <html lang={locale}>
+    <html lang="en">
       <head>
         <script
           async
@@ -65,11 +49,10 @@ export default async function RootLayout(props: {
           enableSystem
           disableTransitionOnChange
         >
-          <NextIntlClientProvider>
-            <PostHogProvider>
-              {props.children}
-            </PostHogProvider>
-          </NextIntlClientProvider>
+          <PostHogProvider>
+            {props.children}
+          </PostHogProvider>
+
         </ThemeProvider>
 
       </body>
